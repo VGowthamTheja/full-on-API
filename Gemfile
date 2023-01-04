@@ -57,11 +57,17 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
+  # Monitor file changes
+  gem 'guard'
+  gem 'guard-livereload', '~> 2.4', require: false
+  gem 'rack-livereload'
+  gem 'zeus', '~> 0.15.14'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "spring"
 end
 
 group :test do
