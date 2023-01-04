@@ -1,0 +1,45 @@
+.sidebar-base {
+    width: 15vw;
+    height: 100%;
+    background-color: rgb(29, 29, 29);
+    border-right: 5px solid rgb(255, 102, 0);
+    color: lightgray;
+}
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar-body {
+    padding: 1rem;
+}
+.sidebar_title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    place-content: center;
+    color: rgb(128, 128, 128);
+    border-bottom: 2px solid rgb(128, 128, 128);
+}
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 0.3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.icon:hover {
+    cursor: pointer;
+    background-color: rgb(177, 177, 177, 0.5);
+    border-radius: 0.3rem;
+    color: white;
+}
+
+.icon > * {
+    margin: 0.5rem
+}
+
+.utility {
+    height: 65.8vh;
+}
