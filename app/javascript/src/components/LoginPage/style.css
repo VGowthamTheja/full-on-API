@@ -1,0 +1,17 @@
+.login-form {
+    margin: 20vh auto !important;
+    max-width: 500px;
+}
+.login-form > * {
+    margin-top: 1vh;
+}
+.login-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form > button {
+    width: 100%;
+    margin-top: 2vh;
+}
