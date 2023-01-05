@@ -76,3 +76,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "net-http", "~> 0.3.2"
+
+gem 'bcrypt', '~> 3.1', '>= 3.1.18'
+gem 'rack-cors', :require => 'rack/cors'

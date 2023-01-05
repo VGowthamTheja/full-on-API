@@ -1,0 +1,1 @@
+Rails.application.config.session_store :cookie_store, key: "_full_on_api_app", domain: "http://localhost:3000"

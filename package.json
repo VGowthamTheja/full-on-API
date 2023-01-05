@@ -4,13 +4,19 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@hookform/resolvers": "^2.9.10",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "@mui/icons-material": "^5.11.0",
+    "@mui/lab": "^5.0.0-alpha.114",
     "@mui/material": "^5.11.3",
+    "axios": "^1.2.2",
     "esbuild": "^0.16.13",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.41.5",
+    "react-router-dom": "^6.6.1",
+    "zod": "^3.20.2"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets --loader:.js=jsx"
