@@ -12,9 +12,9 @@ export default class extends Controller {
     const app = document.getElementById("app");
     createRoot(app).render(
       <React.StrictMode>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
       </React.StrictMode>
     );
   }

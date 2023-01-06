@@ -1,8 +1,13 @@
 import { Typography } from '@mui/material'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Layout from '../../components/Layout'
+import { AuthContext } from '../../context/AuthContext'
 
 const About = () => {
+  const { setSpinner } = useContext(AuthContext);
+  useEffect(()=>{
+    setSpinner(false)
+  },[])
   return (
     <div>
       <Layout>

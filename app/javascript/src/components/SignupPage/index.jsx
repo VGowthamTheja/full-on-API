@@ -7,16 +7,25 @@ import {
   InputLabel,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import axios from "axios";
 import "./style.css";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
+  const navigator = useNavigate();
   const [error, setError] = useState(false);
+  const { userState, setUserState, setSpinner } = useContext(AuthContext);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
     password_confirmation: "",
   });
+
+  useEffect(()=>{
+    setSpinner(false)
+  },[])
 
   const handleChange = (event) => {
     setUserData({ ...userData, [event.target.name]: event.target.value });
@@ -32,7 +41,34 @@ const SignupPage = () => {
       setError(true);
       return;
     }
-    
+
+    setError(false);
+
+    fetch("http://localhost:3000/registrations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: {
+          email: userData.email,
+          password: userData.password,
+          password_confirmation: userData.password_confirmation,
+        },
+      }),
+      credentials: "same-origin",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "created") {
+          setUserState({
+            loggedIn: "LOGGED_IN",
+            user: data.user,
+          });
+          navigator("/");
+        }
+      })
+      .catch((error) => {
+        console.log("register err", error);
+      });
   };
 
   return (
