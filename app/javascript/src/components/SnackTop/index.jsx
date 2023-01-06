@@ -1,21 +1,13 @@
 import { Button, IconButton, Snackbar } from "@mui/material";
 import { Close } from '@mui/icons-material'
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const SnackTop = () => {
-  const [state, setState] = React.useState({
-    open: false,
-    vertical: "top",
-    horizontal: "center",
-  });
-  const { vertical, horizontal, open } = state;
-
-  const handleClick = (newState) => () => {
-    setState({ open: true, ...newState });
-  };
+  const { snackOpen, setSnackOpen } = useContext(AuthContext);
 
   const handleClose = () => {
-    setState({ ...state, open: false });
+    setSnackOpen({flag: false, message: ''});
   };
 
   const action = (
@@ -33,20 +25,13 @@ const SnackTop = () => {
 
   return (
     <div>
-      <Button
-        onClick={handleClick({
-          vertical: "top",
-          horizontal: "center",
-        })}
-      >
-        Top-Center
-      </Button>
       <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        open={open}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={snackOpen.flag}
+        autoHideDuration={6000}
         onClose={handleClose}
-        message="signed in successfully"
-        key={vertical + horizontal}
+        message={snackOpen.message}
+        key={'topbottom'}
         action={action}
       />
     </div>

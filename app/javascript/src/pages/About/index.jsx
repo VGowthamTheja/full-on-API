@@ -5,9 +5,7 @@ import { AuthContext } from '../../context/AuthContext'
 
 const About = () => {
   const { setSpinner } = useContext(AuthContext);
-  useEffect(()=>{
-    setSpinner(false)
-  },[])
+  
   return (
     <div>
       <Layout>

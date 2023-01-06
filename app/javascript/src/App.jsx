@@ -12,6 +12,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 const App = () => {
   const navigator = useNavigate();
   const [spinner, setSpinner] = useState(false);
+  const [snackOpen, setSnackOpen] = useState({ flag: false, message: "" });
   const [userState, setUserState] = useState({
     loggedIn: "NOT_LOGGED_IN",
     user: {},
@@ -53,7 +54,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider
-      value={{ userState, setUserState, spinner, setSpinner }}
+      value={{ userState, setUserState, snackOpen, setSnackOpen }}
     >
       <Routes>
         <Route path="/" element={<Home />} />

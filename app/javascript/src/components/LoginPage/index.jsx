@@ -10,19 +10,27 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import SnackTop from "../SnackTop";
 import "./style.css";
 
 const LoginPage = () => {
   const navigator = useNavigate();
   const [error, setError] = useState(false);
-  const { setUserState, setSpinner } = useContext(AuthContext);
+  const { setUserState, setSnackOpen } = useContext(AuthContext);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
 
+  const setNotification = (message) => {
+    setSnackOpen({
+      flag: true,
+      message: message
+    })
+  }
+
   useEffect(()=>{
-    setSpinner(false)
+    setNotification('sign in to continue...')
   },[])
 
   const handleChange = (event) => {
@@ -33,6 +41,7 @@ const LoginPage = () => {
     event.preventDefault();
     if (!userData.email || !userData.password) {
       setError(true);
+      setNotification('Fields should not be empty');
       return;
     }
 
@@ -57,7 +66,12 @@ const LoginPage = () => {
             user: data.user,
           });
           navigator("/");
+          setSnackOpen({
+            flag: true,
+            message: 'Logged in successfully!!'
+          })
         } else if (!data.logged_in) {
+          setNotification('Unable to log in. Please check your credentials!')
           console.log('unable to login', data);
         }
       })
@@ -68,6 +82,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-form">
+      <SnackTop />
       <div className="login-title">
         <Typography variant="h4">FullOnAPI</Typography>
       </div>
