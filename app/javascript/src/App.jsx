@@ -32,7 +32,7 @@ const App = () => {
             loggedIn: "LOGGED_IN",
             user: data.user,
           });
-          navigator("/");
+          navigator(window.location.pathname);
         } else if (!data.logged_in && userState.loggedIn === "LOGGED_IN") {
           setUserState({
             loggedIn: "NOT_LOGGED_IN",

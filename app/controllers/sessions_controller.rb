@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
         user = User
                 .find_by(email: params["user"]["email"])
                 .try(:authenticate, params["user"]["password"])
+
         if user
             session[:user_id] = user.id
             render json: { user: user, status: :created, logged_in: true}
-            # redirect_to root_path
         else
             render json: { status: 401, logged_in: false }
         end
