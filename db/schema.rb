@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema[7.0].define(version: 2023_01_07_071903) do
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -19,6 +20,12 @@
     t.integer "manager_id"
   end
 
+  create_table "projects_users", id: false, force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "user_id", null: false
+    t.index ["project_id"], name: "index_projects_users_on_project_id"
+    t.index ["user_id"], name: "index_projects_users_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -33,4 +40,7 @@
     t.index ["manager_id"], name: "index_users_on_manager_id"
   end
 
+  add_foreign_key "projects_users", "projects"
+  add_foreign_key "projects_users", "users"
+  add_foreign_key "users", "users", column: "manager_id"
 end
