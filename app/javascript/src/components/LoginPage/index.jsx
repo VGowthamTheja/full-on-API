@@ -1,3 +1,4 @@
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Button,
   FormControl,
@@ -7,16 +8,18 @@ import {
   InputLabel,
   Typography,
 } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import LoadSpinner from "../LoadSpinner";
 import SnackTop from "../SnackTop";
 import "./style.css";
 
 const LoginPage = () => {
   const navigator = useNavigate();
   const [error, setError] = useState(false);
-  const { setUserState, setSnackOpen } = useContext(AuthContext);
+  const [visibility, setVisibility] = useState(false);
+  const { setUserState, setSnackOpen, loading } = useContext(AuthContext);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -80,9 +83,18 @@ const LoginPage = () => {
       });
   };
 
+  const visibleEye = useMemo(()=>{
+    if (visibility) {
+      return <VisibilityOff className="visible-eye" onClick={()=>setVisibility(!visibility)} />
+    } else {
+      return <Visibility className="visible-eye" onClick={()=>setVisibility(!visibility)} />
+    }
+  },[visibility])
+
   return (
     <div className="login-form">
       <SnackTop />
+      {loading && <LoadSpinner />}
       <div className="login-title">
         <Typography variant="h4">FullOnAPI</Typography>
       </div>
@@ -111,11 +123,12 @@ const LoginPage = () => {
             value={userData.password}
             error={error}
             onChange={handleChange}
-            type="password"
+            type={visibility ? "text": "password"}
             name="password"
             id="mp-input"
             aria-describedby="my-helper-text"
             required
+            endAdornment={visibleEye}
           />
           <FormHelperText id="my-helper-text">
             minmum. 6 characters

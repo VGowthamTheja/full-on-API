@@ -18,6 +18,12 @@ class User < ApplicationRecord
     # user role definitions
     enum role: { user: 'user', manager: 'manager', TL: 'TL', admin: 'admin' }
 
+    # Confining User scopes
+    scope :managers, -> {select("id, user_name").where(role: 'manager')}
+    scope :admins, -> {select("id, user_name").where(role: 'admin')}
+    scope :team_leads, -> {select("id, user_name").where(role: 'TL')}
+    scope :users, -> {select("id, user_name").where(role: 'user')}
+
     after_initialize :set_default_role, if: :new_record?
 
     def set_default_role

@@ -1,0 +1,10 @@
+.welcome-message {
+    margin: 0.2rem 0.5rem 0.7rem 0.5rem;
+    padding: 4rem;
+    text-align: center;
+    border-bottom: 5px solid limegreen;
+    background-color: rgba(0, 255, 0, 0.1);
+    color: limegreen;
+    font-size: 24px;
+    font-weight: 900;
+}

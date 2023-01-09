@@ -15,3 +15,8 @@
     width: 100%;
     margin-top: 2vh;
 }
+
+.visible-eye:hover {
+    cursor: pointer;
+    color: rgb(0, 110, 161);
+}

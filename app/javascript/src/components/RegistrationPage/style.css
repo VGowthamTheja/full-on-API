@@ -1,9 +1,12 @@
 .register-form {
-    margin: 20vh auto !important;
-    max-width: 500px;
+    margin-top: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding:0rem 10rem;
 }
 .register-form > * {
-    margin-top: 1vh;
+    margin-right: 8vh;
 }
 .register-title {
     display: flex;
@@ -14,4 +17,4 @@
 .register-form > button {
     width: 100%;
     margin-top: 2vh;
-}
+}   
