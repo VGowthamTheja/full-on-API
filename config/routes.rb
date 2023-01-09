@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
   resources :sessions, only: [:create]
-  resources :registrations, only: [:create]
+  resources :registrations, only: [:create, :update, :destroy]
 
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
