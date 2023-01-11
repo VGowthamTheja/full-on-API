@@ -1,0 +1,8 @@
+.project-container {
+    margin: 0.2rem 0.5rem 0.7rem 0.5rem;
+}
+.table-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

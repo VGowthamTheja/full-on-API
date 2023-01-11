@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+# 15.times do |i|
+#     Project.create(
+#         title: "project #{i+1}",
+#         content: "this is the placeholder content for project #{i+1}",
+#         budget: "#{i+1},000,000",
+#         manager_id: 3,
+#     )
+# end

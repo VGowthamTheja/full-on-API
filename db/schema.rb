@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_07_071903) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_103707) do
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -36,6 +36,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_071903) do
     t.datetime "confirmed_at"
     t.string "role"
     t.string "user_name"
+    t.datetime "dob"
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["manager_id"], name: "index_users_on_manager_id"
   end

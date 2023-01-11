@@ -1,12 +1,13 @@
 import { Typography } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import LoadSpinner from "../../components/LoadSpinner";
-import Projects from "../../components/Projects";
 import Welcome from "../../components/Welcome";
+
 import './style.css'
 
 import { AuthContext } from "../../context/AuthContext";
+import FlowTab from "../../components/FlowTab";
 
 const Home = () => {
   const { userState, loading } = useContext(AuthContext)
@@ -16,7 +17,7 @@ const Home = () => {
       {loading && <LoadSpinner  />}
       <div className="hero">
         <Welcome />
-        <Projects />
+        <FlowTab />
       </div>
     </Layout>
   );

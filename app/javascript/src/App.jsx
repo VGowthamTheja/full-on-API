@@ -6,23 +6,23 @@ import LoginPage from "./components/LoginPage";
 import { AuthContext } from "./context/AuthContext";
 import RegistrationPage from "./components/RegistrationPage";
 import axios from "axios";
-
+import ProfilePage from "./components/ProfilePage";
 
 const requestURLs = {
-  LOGIN: '/login',
-  REGISTER: '/register',
-  LOGGED_IN: '/logged_in',
-  IS_ADMIN: '/is_admin',
-  LOGOUT: '/logout',
-  SESSIONS: '/sessions',
-  ADMIN_REGISTRATIONS: '/admin/registrations',
-  SUPERVISORS: '/api/v1/data/supervisors',
-  PROJECT_LIST: '/projects'
-}
+  LOGIN: "/login",
+  REGISTER: "/register",
+  LOGGED_IN: "/logged_in",
+  IS_ADMIN: "/is_admin",
+  LOGOUT: "/logout",
+  SESSIONS: "/sessions",
+  ADMIN_REGISTRATIONS: "/admin/registrations",
+  SUPERVISORS: "/api/v1/data/supervisors",
+  PROJECT_LIST: "/projects",
+};
 
 const App = () => {
   const navigator = useNavigate();
-
+  const [projectList, setProjectList] = useState([]);
   const [snackOpen, setSnackOpen] = useState({ flag: false, message: "" });
   const [loading, setLoading] = useState(false);
   const [userState, setUserState] = useState({
@@ -72,7 +72,9 @@ const App = () => {
         setSnackOpen,
         loading,
         setLoading,
-        requestURLs
+        requestURLs,
+        projectList,
+        setProjectList,
       }}
     >
       <Routes>
@@ -80,6 +82,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </AuthContext.Provider>
   );

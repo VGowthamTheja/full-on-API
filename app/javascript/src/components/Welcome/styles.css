@@ -2,9 +2,9 @@
     margin: 0.2rem 0.5rem 0.7rem 0.5rem;
     padding: 4rem;
     text-align: center;
-    border-bottom: 5px solid limegreen;
-    background-color: rgba(0, 255, 0, 0.1);
-    color: limegreen;
+    border-bottom: 5px solid rgb(50, 130, 205);
+    background-color: rgba(0, 140, 255, 0.1);
+    color: rgb(50, 135, 205);
     font-size: 24px;
     font-weight: 900;
 }

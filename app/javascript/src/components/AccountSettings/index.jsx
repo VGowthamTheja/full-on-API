@@ -10,7 +10,7 @@ import { AuthContext } from "../../context/AuthContext";
 export default function AccountSettings() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const { setUserState } = React.useContext(AuthContext);
+  const { userState, setUserState } = React.useContext(AuthContext);
   const navigator = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,11 +36,16 @@ export default function AccountSettings() {
           loggedIn: "NOT_LOGGED_IN",
           user: {},
         });
-        navigator(directPaths['Login']);
+        navigator(directPaths["Login"]);
       })
       .catch((error) => {
         console.log("logout error", error);
       });
+  };
+
+  const handleProfileRedirect = () => {
+    navigator(directPaths["Profile"]);
+    handleClose();
   };
 
   return (
@@ -64,9 +69,10 @@ export default function AccountSettings() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleUserTransfer}>Register</MenuItem>
-        <MenuItem onClick={handleUserTransfer}>Login</MenuItem>
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        {userState.user.role === "admin" ? (
+          <MenuItem onClick={handleUserTransfer}>Register</MenuItem>
+        ) : null}
+        <MenuItem onClick={handleProfileRedirect}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>

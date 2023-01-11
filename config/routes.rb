@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   get :is_admin, to: "sessions#is_admin"
 
   get 'projects', to: 'projects#list'
+  post 'projects/user/:id/assign', to: 'projects#assign_project_to_user'
   resources :projects
   
   namespace :admin do
-    resources :registrations, only: [:create]
+    patch 'registrations/:id/reset_password', to: 'registrations#reset_password'
+    resources :registrations, only: [:create, :update]
   end
 
   namespace :api do
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
       get 'data/managers'
       get 'data/admins'
       get 'data/supervisors'
+      get 'data/:id/projects', to: 'data#projects'
     end
   end
 

@@ -1,8 +1,13 @@
 class Api::V1::DataController < ApplicationController
 
     def users_display
-        response = User.users
-        render json: { users: response, status: :ok  }
+        sql = "select * from users where role != 'admin' and role != 'manager'"
+        record = ActiveRecord::Base.connection.execute(sql)
+        if record
+            render json: { data: record, status: :ok  }
+        else
+            render json: { data: record, status: :not_found }
+        end
     end
 
     def supervisors
@@ -30,6 +35,16 @@ class Api::V1::DataController < ApplicationController
             render json: { data: response, status: :ok }
         else
             render html: "There are no admins"
+        end
+    end
+
+    def projects
+        user = User.find_by(id: params[:id])
+
+        if user
+            render json: { data: user.projects, status: :found }
+        else
+            render json: { data: {}, status: :not_found}
         end
     end
 

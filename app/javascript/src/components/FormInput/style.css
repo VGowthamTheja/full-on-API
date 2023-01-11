@@ -1,0 +1,31 @@
+.btn {
+    padding: 0.4rem 1rem;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 1px 1px 7px #888888;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+.btn:active {
+    scale: 0.97;
+}
+.edit-btn {
+    background-color: rgba(0, 102, 255, 0.616);
+    color: whitesmoke;
+}
+.save-btn {
+    background-color: rgb(6, 141, 2);
+    color: whitesmoke;
+}
+.cancel-btn {
+    background-color: rgba(201, 201, 201, 0.616);
+    color: black;
+}
+.update-password-link {
+    font-size: large;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

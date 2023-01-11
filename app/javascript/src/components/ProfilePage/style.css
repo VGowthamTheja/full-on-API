@@ -1,0 +1,14 @@
+.card-base {
+    padding: 3rem 7rem;
+}
+.card-origin {
+    min-height: 75vh;
+    max-height: 90vh;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.employee-edit-form {
+    margin: auto 1.5rem;
+}

@@ -5,7 +5,7 @@ class User < ApplicationRecord
     # Validations
     validates_presence_of :email
     validates_uniqueness_of :email
-    validates_presence_of :password
+    validates_presence_of :password, on: :create
 
     # Self joining for the heirarchy of users
     has_many :subordinates, class_name: 'User', foreign_key: "manager_id"
@@ -19,7 +19,7 @@ class User < ApplicationRecord
     enum role: { user: 'user', manager: 'manager', TL: 'TL', admin: 'admin' }
 
     # Confining User scopes
-    scope :managers, -> {select("id, user_name").where(role: 'manager')}
+    scope :managers, -> {select("id, user_name, role").where(role: 'manager')}
     scope :admins, -> {select("id, user_name").where(role: 'admin')}
     scope :team_leads, -> {select("id, user_name").where(role: 'TL')}
     scope :users, -> {select("id, user_name").where(role: 'user')}
