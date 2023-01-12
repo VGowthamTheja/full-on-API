@@ -15,38 +15,43 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    project = Project.find_by(id: params['id'])
+    begin
+      project = Project.find_by(id: params['id'])
 
-    if project
-      render json: { data: project, status: :found }
-    else
-      render json: { data: {}, status: :not_found }
+      raise CustomException, "Project not found" if project.nil?
+      render json: { status: :found, data: project }
+    rescue => exception
+      render json: { status: :not_found, message: exception.message }
     end
   end
 
   def create
-    project = Project.create(title: params['project']['title'], content: params['project']['content'],
-                             budget: params['project']['budget'],
-                             manager_id: params['project']['manager'])
-
-    if project
-      render json: { data: project, status: :created }
-    else
-      render json: { status: :unprocessable_entity }
+    begin
+      project = Project.create(permitted_params)
+      raise CustomException, "Project not created" if project.id.nil?
+      render json: { status: :created, data: project }
+    rescue => exception
+      render json: { status: :unprocessable_entity, message: exception.message }
     end
   end
 
   def update # rubocop:disable Metrics/AbcSize
-    project = Project.find_by(id: params['id'])
-
-    project.update(title: params['project']['title'], content: params['project']['content'],
-                   budget: params['project']['budget'],
-                   manager_id: params['project']['manager'])
-    if project
-      render json: { data: project, status: :ok }
-    else
-      render json: { data: {}, status: :unprocessable_entity }
+    begin
+      project = Project.find(params[:id])
+      if project.update!(permitted_params)
+        render json: { data: project, status: :ok }
+      else
+        raise CustomException, "Project couldn't be updated."
+      end
+    rescue => exception
+      render json: { data: {}, status: :unprocessable_entity, message: exception.message }
     end
+
+    # if project
+    #   render json: { data: project, status: :ok }
+    # else
+    #   render json: { data: {}, status: :unprocessable_entity }
+    # end
   end
 
   def assign_project_to_user # rubocop:disable Metrics/AbcSize
@@ -72,5 +77,11 @@ class ProjectsController < ApplicationController
   def destroy
     project = Project.find_by(id: params['id'])
     project.destroy
+  end
+
+  private
+
+  def permitted_params
+    params.require(:project).permit(:title, :content, :budget, :manager_id)
   end
 end
