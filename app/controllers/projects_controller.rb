@@ -15,37 +15,31 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    begin
-      project = Project.find_by(id: params['id'])
+    project = Project.find_by(id: params['id'])
 
-      raise CustomException, "Project not found" if project.nil?
-      render json: { status: :found, data: project }
-    rescue => exception
-      render json: { status: :not_found, message: exception.message }
-    end
+    raise CustomException, 'Project not found' if project.nil?
+
+    render json: { status: :found, data: project }
+  rescue StandardError => e
+    render json: { status: :not_found, message: e.message }
   end
 
   def create
-    begin
-      project = Project.create(permitted_params)
-      raise CustomException, "Project not created" if project.id.nil?
-      render json: { status: :created, data: project }
-    rescue => exception
-      render json: { status: :unprocessable_entity, message: exception.message }
-    end
+    project = Project.create(permitted_params)
+    raise CustomException, 'Project not created' if project.id.nil?
+
+    render json: { status: :created, data: project }
+  rescue StandardError => e
+    render json: { status: :unprocessable_entity, message: e.message }
   end
 
-  def update # rubocop:disable Metrics/AbcSize
-    begin
-      project = Project.find(params[:id])
-      if project.update!(permitted_params)
-        render json: { data: project, status: :ok }
-      else
-        raise CustomException, "Project couldn't be updated."
-      end
-    rescue => exception
-      render json: { data: {}, status: :unprocessable_entity, message: exception.message }
-    end
+  def update
+    project = Project.find(params[:id])
+    raise CustomException, "Project couldn't be updated." unless project.update!(permitted_params)
+
+    render json: { data: project, status: :ok }
+  rescue StandardError => e
+    render json: { data: {}, status: :unprocessable_entity, message: e.message }
 
     # if project
     #   render json: { data: project, status: :ok }
