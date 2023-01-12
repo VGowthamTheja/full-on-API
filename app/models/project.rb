@@ -1,11 +1,14 @@
-class Project < ApplicationRecord
-    # Validations
-    validates_presence_of :title
-    validates_uniqueness_of :title
-    validates_presence_of :content
-    validates_presence_of :budget
+# frozen_string_literal: true
 
-    # Project to User associations
-    belongs_to :manager, class_name: 'User', foreign_key: :manager_id
-    has_and_belongs_to_many :users
+# project model
+class Project < ApplicationRecord
+  # Validations
+  validates :title, presence: true
+  validates :title, uniqueness: true
+  validates :content, presence: true
+  validates :budget, presence: true
+
+  # Project to User associations
+  belongs_to :manager, class_name: 'User'
+  has_and_belongs_to_many :users
 end

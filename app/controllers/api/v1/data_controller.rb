@@ -1,51 +1,55 @@
-class Api::V1::DataController < ApplicationController
+# frozen_string_literal: true
 
-    def users_display
-        sql = "select * from users where role != 'admin' and role != 'manager'"
-        record = ActiveRecord::Base.connection.execute(sql)
+module Api
+  module V1
+    # Data Controller
+    class DataController < ApplicationController
+      def users_display
+        record = User.where.not(role: %w[admin manager])
         if record
-            render json: { data: record, status: :ok  }
+          render json: { data: record, status: :ok }
         else
-            render json: { data: record, status: :not_found }
+          render json: { data: record, status: :not_found }
         end
-    end
+      end
 
-    def supervisors
-        response = User.where(role: 'manager').or(User.where(role: 'TL'))
+      def supervisors
+        response = User.where(role: %w[TL manager])
 
         if response.any?
-            render json: { data: response, status: :ok }
+          render json: { data: response, status: :ok }
         else
-            render html: "There are no supervisors"
+          render html: 'There are no supervisors'
         end
-    end
+      end
 
-    def managers
+      def managers
         response = User.managers
         if response.any?
-            render json: { data: response, status: :ok }
+          render json: { data: response, status: :ok }
         else
-            render html: "There are no managers"
+          render html: 'There are no managers'
         end
-    end
-    
-    def admins
+      end
+
+      def admins
         response = User.admins
         if response.any?
-            render json: { data: response, status: :ok }
+          render json: { data: response, status: :ok }
         else
-            render html: "There are no admins"
+          render html: 'There are no admins'
         end
-    end
+      end
 
-    def projects
+      def projects
         user = User.find_by(id: params[:id])
 
         if user
-            render json: { data: user.projects, status: :found }
+          render json: { data: user.projects, status: :found }
         else
-            render json: { data: {}, status: :not_found}
+          render json: { data: {}, status: :not_found }
         end
+      end
     end
-
+  end
 end

@@ -1,8 +1,8 @@
-class PagesController < ApplicationController
-    def index
-    end
+# frozen_string_literal: true
 
-    def error
-        
-    end
+# pages controller
+class PagesController < ApplicationController
+  def index; end
+
+  def error; end
 end
