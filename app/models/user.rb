@@ -11,6 +11,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :password, presence: { on: :create }
 
+  # Custom validation
+  validate :format_email
+
   # Self joining for the heirarchy of users
   has_many :subordinates, class_name: 'User', foreign_key: 'manager_id'
   belongs_to :manager, class_name: 'User', optional: true
@@ -36,5 +39,11 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def format_email
+    unless (self.email =~ %r{^\S+@\S+\.\S+$}xi).present?
+      errors.add(:email, "is not of a valid pattern")
+    end
   end
 end

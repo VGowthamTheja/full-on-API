@@ -3,6 +3,11 @@
 module Admin
   # Registrations controller
   class RegistrationsController < ApplicationController
+    def index
+      users = User.select('user_name, email, role, id')
+      render json: users, status: :ok
+    end
+
     def create
       user = User.new(permitted_params)
       user.password = 'i04x%1REo'
@@ -25,6 +30,12 @@ module Admin
       end
     rescue ActiveRecord::RecordNotFound => e
       render json: { data: {}, status: :unprocessable_entity, message: e.message }
+    end
+
+    def delete
+      user = User.find(params[:id])
+      user.destroy
+      render json: { data: {}, status: :ok, message: 'user is successfully destroyed' }
     end
 
     def reset_password

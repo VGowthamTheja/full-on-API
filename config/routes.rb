@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   resources :projects
 
   namespace :admin do
+    delete 'registrations/delete', to: 'registrations#delete'
     patch 'registrations/:id/reset_password', to: 'registrations#reset_password'
-    resources :registrations, only: %i[create update]
+    resources :registrations, only: %i[index create update]
   end
 
   namespace :api do

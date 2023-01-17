@@ -53,6 +53,8 @@ gem 'bootsnap', require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem "factory_bot_rails", "~> 6.2"
+  gem "rails-controller-testing", "~> 1.0"
 end
 
 group :development do
@@ -64,6 +66,7 @@ group :development do
   gem 'guard-livereload', '~> 2.4', require: false
   gem 'rack-livereload'
   gem 'zeus', '~> 0.15.14'
+  gem 'rspec-rails', '~> 6.0.0'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -87,3 +90,9 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rubocop', '~> 1.43'
 
 gem 'brakeman', '~> 5.4'
+
+gem 'rspec', '~> 3.0'
+
+
+gem "faker", "~> 3.1"
+
